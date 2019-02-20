@@ -1,0 +1,106 @@
+#ifndef __UART_H__
+#define __UART_H__
+
+#include <stdio.h>
+#include <stdint.h>
+
+
+typedef volatile uint32_t IOregister;
+
+typedef struct UartRegs UartRegs;
+struct UartRegs{
+	IOregister	Sr;
+	IOregister	Dr;
+	IOregister	Brr;
+	IOregister	Cr1;
+	IOregister	Cr2;
+	IOregister	Cr3;
+	IOregister	Gtpr;
+};
+
+
+typedef enum {
+	USART_OVER_16 = 0,
+	USART_OVER_8
+}OversamplingMode;
+
+/*	To use in configure function
+ * 	Used bit in CR1,2,3 is only 16 bits
+ * 	OR them together so that we can immediately configure all register by just one function
+ *
+ */
+//Status Register
+#define USART_PE				1<<0	//Parity error
+#define USART_FE				1<<1	//Framing error
+#define USART_NF				1<<2	//Noise Detected flag
+#define USART_ORE				1<<3	//Overun Error
+#define USART_IDLE				1<<4	//IDLE line detected
+#define USART_RXNE				1<<5	//Read data register not empty
+#define USART_TC				1<<6	//Transmission complete
+#define USART_TXE				1<<7	//Transmit data register empty
+#define USART_LBD				1<<8	//LIN break detection flag
+#define USART_CTS				1<<9	//Clear to send flag
+
+//control register 1
+#define USART_SBK				1<<0	//send break
+#define USART_RWU				1<<1	//receiver mode
+#define USART_RE				1<<2	//receiver enable
+#define USART_TE				1<<3	//transmitter enable
+#define USART_IDLEIE			1<<4	//IDLE interrupt enable
+#define USART_RXNEIE			1<<5	//Receive not empty interrupt enable
+#define USART_TCIE				1<<6	//transmission complete interrupt enable
+#define USART_TXEIE				1<<7	//transmit enable interrupt enable
+#define USART_PEIE				1<<8	//peripheral enable
+#define USART_PS				1<<9	//parity selection
+#define USART_PCE				1<<10	//parity control enable
+#define USART_WAKE				1<<11	//wake up method
+#define USART_M					1<<12	//word length
+#define USART_UE				1<<13	//usart enable
+#define USART_OVER8				1<<15	//oversampling mode 8
+#define USART_OVER16			0<<15	//oversampling mode 16
+
+//control register 2
+#define USART_LBDL				1<<21	//LIN break detection length
+#define USART_LBDLIE			1<<22	//LIN break detection interrupt enable
+#define USART_LBCL				1<<24	//Last bit clock pulse
+#define USART_CPHA				1<<25	//clock phase
+#define USART_CPOL				1<<26	//clock parity
+#define USART_CLKEN				1<<27	//clock enable
+#define USART_STOPBIT_1  		0<<28	//stop bits mode
+#define USART_STOPBIT_0DOT5		1<<28
+#define USART_STOPBIT_2  		2<<28
+#define USART_STOPBIT_1DOT5		3<<28
+#define USART_LINEN				1<<30	//LIN mode enable
+
+//control register 3
+#define USART_EIE				(1<<32)ULL		//Error interrupt enable
+#define USART_IREN				(1<<33)ULL		//IrDa mode enable
+#define USART_IRLP				(1<<34)ULL		//IrDA low power
+#define USART_HDSEL				(1<<35)ULL		//Half duplex selection
+#define USART_NACK				(1<<36)ULL		//smartcard NACK enable
+#define USART_SCEN				(1<<37)ULL		//smartcard mode enable
+#define USART_DMAR	  			(1<<38)ULL		//DMA enable receiver
+#define USART_DMAT				(1<<39)ULL		//DMA enable ransmitter
+#define USART_RTSE	  			(1<<40)ULL		//RTS enable
+#define USART_CTSE				(1<<41)ULL		//CTS enbale
+#define USART_CTSIE				(1<<42)ULL		//CTS interrupt enable
+#define USART_ONEBIT			(1<<43)ULL		//one sample bit method enable
+
+#define SET_OVERSAMPLING_MODE(uart,whichMode)	(uart)->Cr1 |= whichMode
+#define IS_OVERSAMPLING_16(mode)				mode &= 0x80
+
+#define USARTIsStatus(usart,whichFlags)			(usart)->Sr & whichFlags
+#define usartIsTXRegEmpty(usart)				USARTIsStatus(usart,USART_TXE)
+#define usartIsRXNERegNotEmpty(usart)			USARTIsStatus(usart,USART_RXNE)
+
+#define uart4 (UartRegs *)0x40004C00
+#define uart5 (UartRegs *)0x40005000
+#define uart7 (UartRegs *)0x40007800
+#define uart7 (UartRegs *)0x40007800
+#define uart8 (UartRegs *)0x40007C00
+
+//function header
+void configureUSARTBaudRate(UartRegs *usart,uint32_t peripheralFreq,uint32_t desiredBR,OversamplingMode oversampling);
+void configureUSART(UartRegs *usart,long long mode,int desiredBR,uint32_t peripheralFreq);
+
+#endif /* __UART_H__ */

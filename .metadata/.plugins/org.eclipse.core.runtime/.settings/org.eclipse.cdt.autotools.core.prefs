@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+org.eclipse.cdt.autotools.ui.autoconf.editor.acmacro=0,0,0
+org.eclipse.cdt.autotools.ui.automake.editor.default=255,255,255
+org.eclipse.cdt.autotools.ui.automake.editor.function=255,255,255
+org.eclipse.cdt.autotools.ui.automake.editor.function_bold=true

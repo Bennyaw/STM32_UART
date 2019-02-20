@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdint.h>
+#include "Uart.h"
+
+
+void configureUSARTBaudRate(UartRegs *usart,uint32_t peripheralFreq,uint32_t desiredBR,OversamplingMode oversampling){
+
+	float divider;
+	uint8_t fractional;
+	uint8_t mantissa;
+
+	SET_OVERSAMPLING_MODE(usart,oversampling);
+
+	divider = (float)peripheralFreq/(8*(2-oversampling)*desiredBR);
+	mantissa = (uint8_t)divider;
+	fractional = (int)((float)(divider - mantissa)*(8*(2-oversampling)));
+
+	usart->Brr = (mantissa << 4)|fractional;
+}
+
+
+void configureUSART(UartRegs *usart,long long mode,int desiredBR,uint32_t peripheralFreq){
+
+	usart->Cr1 = (uint32_t)(mode & 0xffff);
+	usart->Cr2 = (uint32_t)((mode >> 16) & 0xffff);
+	usart->Cr3 = (uint32_t)(mode >> 32);
+
+	if(IS_OVERSAMPLING_16(mode))
+		configureUSARTBaudRate(usart,peripheralFreq,desiredBR,USART_OVER_16);
+	else
+		configureUSARTBaudRate(usart,peripheralFreq,desiredBR,USART_OVER_8);
+}

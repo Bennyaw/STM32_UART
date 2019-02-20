@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <stdint.h>
+#include "Uart.h"
+
+
+void configureUARTBaudRate(UartRegs *uart,uint32_t peripheralFreq,uint32_t desiredBR,int oversampling){
+	uint32_t baudRate;
+	float divider,fractional;
+	int mantissa;
+
+	SET_OVERSAMPLING_MODE(uart,oversampling);
+
+	divider = (float)peripheralFreq/(8*(2-oversampling)*desiredBR);
+	mantissa = (uint8_t)divider;
+	fractional = (int)((float)(divider - mantissa)*16);
+
+	uart->Brr = (mantissa << 4)|fractional;
+}
+
+

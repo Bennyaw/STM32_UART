@@ -1,0 +1,23 @@
+10:16:40 **** Incremental Build of configuration Debug for project Timer2 ****
+make all 
+Building file: ../Src/stm32f4xx_it.c
+Invoking: MCU GCC Compiler
+C:\Bennyaw\STM32\Timer\Timer2\Debug
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 '-D__weak=__attribute__((weak))' '-D__packed=__attribute__((__packed__))' -DUSE_HAL_DRIVER -DSTM32F429xx -I"C:/Bennyaw/STM32/Timer/Timer2/Inc" -I"C:/Bennyaw/STM32/Timer/Timer2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Bennyaw/STM32/Timer/Timer2/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy" -I"C:/Bennyaw/STM32/Timer/Timer2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Bennyaw/STM32/Timer/Timer2/Drivers/CMSIS/Include"  -Og -g3 -Wall -fmessage-length=0 -ffunction-sections -c -fmessage-length=0 -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o" -o "Src/stm32f4xx_it.o" "../Src/stm32f4xx_it.c"
+Finished building: ../Src/stm32f4xx_it.c
+ 
+Building target: Timer2.elf
+Invoking: MCU GCC Linker
+arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -specs=nosys.specs -specs=nano.specs -T"../STM32F429ZITx_FLASH.ld" -Wl,-Map=output.map -Wl,--gc-sections -o "Timer2.elf" @"objects.list"   -lm
+Finished building target: Timer2.elf
+ 
+make --no-print-directory post-build
+Generating hex and Printing size information:
+arm-none-eabi-objcopy -O ihex "Timer2.elf" "Timer2.hex"
+arm-none-eabi-size "Timer2.elf"
+   text	   data	    bss	    dec	    hex	filename
+   5420	     20	   1572	   7012	   1b64	Timer2.elf
+ 
+
+10:16:42 Build Finished (took 2s.41ms)
+
