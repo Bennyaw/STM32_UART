@@ -2,7 +2,7 @@ STM32F429ZIT6 MCU (UART peripheral)
 -----------------------------------
 
 This practical here is to get familiar with the UART peripheral protocol by using the STM32F429ZIT6 MCU.
-ALL the functions used are all user-defined
+*ALL* the functions used are all user-defined
 Here, we are going to do 2 experiments using UART protocol. First is simply send ```Hello,WORLD``` and display it on the TeraTerm, second is to type a command on PC and send it to the MCU Led to switch it on or off or blink. The full report of this practice is
 documented above as ```Report.pdf```. Note that the IDE used is STM32CubeMX.
 
@@ -25,11 +25,12 @@ We are using UART5, configurations of the UART5 are as below:
 
 Send a String and display
 -------------------------
-The purpose here is to get familiar with the transmission of data by using UART. We will be simply sending a string and display it on TeraTerm. The result is attached in the report.
+The purpose here is to get familiar with the transmission of data by using UART. We will be simply sending a string and display it on TeraTerm. Some discussions is attached in the report.
+![Hello,World](C:\Bennyaw\STM32\report pic)
 
 Type command on PC
 ------------------
-More complexity is added compared to the previous experiment, we are going to type some commands such as
+More complexity is added compared to the previous practice, we are going to type some commands such as
 ```
 TURN ON LED             # To turn on the LED (PG13)
 TURN OFF LED            # To turn off the LED (PG13)
