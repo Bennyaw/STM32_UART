@@ -26,7 +26,7 @@ We are using UART5, configurations of the UART5 are as below:
 Send a String and display
 -------------------------
 The purpose here is to get familiar with the transmission of data by using UART. We will be simply sending a string and display it on TeraTerm. Some discussions is attached in the report.
-![Hello,World](C:\Bennyaw\STM32\report pic\hello world.png)
+![Hello,World](hello world.PNG)
 
 Type command on PC
 ------------------
