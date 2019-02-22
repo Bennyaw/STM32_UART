@@ -26,7 +26,10 @@ We are using UART5, configurations of the UART5 are as below:
 Send a String and display
 -------------------------
 The purpose here is to get familiar with the transmission of data by using UART. We will be simply sending a string and display it on TeraTerm. Some discussions is attached in the report.
+
 ![hello world](https://github.com/Bennyaw/STM32_UART/blob/master/hello%20world.PNG)
+
+The image above is outcome of the practice.
 
 Type command on PC
 ------------------
@@ -36,7 +39,10 @@ TURN ON LED             # To turn on the LED (PG13)
 TURN OFF LED            # To turn off the LED (PG13)
 BLINK LED               # To blink LED (PG13)
 ```
-What is happening here is actually when we typed the letters, MCU will receive the data and transmit out through the driver and display it on the screen, and at the same time, we used the user-defined ```stringcompare``` function to identify the command and do the task on the MCU. The outcome is written in the report above.
+What is happening here is actually when we typed the letters, MCU will receive the data and transmit out through the driver and display it on the screen, and at the same time, we used the user-defined ```stringcompare``` function to identify the command and do the task on the MCU.
+
+![command](https://github.com/Bennyaw/STM32_UART/blob/master/hello%20world.PNG)
+![LED](https://github.com/Bennyaw/STM32_UART/blob/master/hello%20world.PNG)
 
 Reference
 ---------
