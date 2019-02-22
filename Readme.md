@@ -2,7 +2,7 @@ STM32F429ZIT6 MCU (UART peripheral)
 -----------------------------------
 
 This practical here is to get familiar with the UART peripheral protocol by using the STM32F429ZIT6 MCU.
-*ALL* the functions used are all user-defined
+**ALL** the functions used are all user-defined
 Here, we are going to do 2 experiments using UART protocol. First is simply send ```Hello,WORLD``` and display it on the TeraTerm, second is to type a command on PC and send it to the MCU Led to switch it on or off or blink. The full report of this practice is
 documented above as ```Report.pdf```. Note that the IDE used is STM32CubeMX.
 
@@ -41,8 +41,11 @@ BLINK LED               # To blink LED (PG13)
 ```
 What is happening here is actually when we typed the letters, MCU will receive the data and transmit out through the driver and display it on the screen, and at the same time, we used the user-defined ```stringcompare``` function to identify the command and do the task on the MCU.
 
-![command](https://github.com/Bennyaw/STM32_UART/blob/master/hello%20world.PNG)
-![LED](https://github.com/Bennyaw/STM32_UART/blob/master/hello%20world.PNG)
+This the command we can see on the console of TeraTerm.
+![command](https://github.com/Bennyaw/STM32_UART/blob/master/TURN%20led.PNG)
+
+The image on the left side shows that the LED is on after the command *TURN ON LED*, image on the right is the turned off LED after the command *TURN OFF LED*
+![LED](https://github.com/Bennyaw/STM32_UART/blob/master/LED.PNG)
 
 Reference
 ---------
